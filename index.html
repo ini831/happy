@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>独一无二的交互空间</title>
+    <style>
+        body { margin: 0; background: #050505; color: #fff; font-family: 'Courier New', sans-serif; overflow: hidden; cursor: crosshair; }
+        .container { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; }
+        
+        /* 核心视觉：光圈 */
+        #cursor-glow {
+            position: fixed; width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.15) 0%, transparent 70%);
+            pointer-events: none; border-radius: 50%;
+            transform: translate(-50%, -50%); transition: transform 0.1s ease;
+        }
+
+        h1 { font-size: 3rem; letter-spacing: 10px; z-index: 1; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div id="cursor-glow"></div>
+    <div class="container">
+        <h1 id="title">INTERACT</h1>
+    </div>
+
+    <script>
+        const glow = document.getElementById('cursor-glow');
+        const title = document.getElementById('title');
+
+        // 鼠标跟随效果
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
+
+        // 点击文字交互效果
+        title.addEventListener('click', () => {
+            title.style.color = '#00ffcc';
+            title.style.textShadow = '0 0 20px #00ffcc';
+            setTimeout(() => {
+                title.style.color = '#fff';
+                title.style.textShadow = 'none';
+            }, 500);
+        });
+    </script>
+</body>
+  </html>
